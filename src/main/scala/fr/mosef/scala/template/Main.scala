@@ -23,7 +23,7 @@ object Main extends App with Job {
     cliArgs(1)
   } catch {
     case e: java.lang.ArrayIndexOutOfBoundsException => {
-      "./src/main/resources/test_file.csv"
+      "./src/main/resources/test.csv"
     }
   }
   val DST_PATH: String = try {
@@ -35,7 +35,7 @@ object Main extends App with Job {
   }
 
   val conf = new SparkConf()
-  conf.set("spark.driver.memory", "64M")
+  conf.set("spark.testing.memory", "471859200")
 
   val sparkSession = SparkSession
     .builder
@@ -44,7 +44,7 @@ object Main extends App with Job {
     .appName("Scala Template")
     .enableHiveSupport()
     .getOrCreate()
-  
+
   sparkSession
     .sparkContext
     .hadoopConfiguration
@@ -62,3 +62,4 @@ object Main extends App with Job {
   writer.write(processedDF, "overwrite", dst_path)
 
 }
+

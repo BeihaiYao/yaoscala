@@ -13,10 +13,16 @@ class ReaderImpl(sparkSession: SparkSession) extends Reader {
       .load(path)
   }
 
+  // Implements the original method from the trait with default CSV settings
   def read(path: String): DataFrame = {
+    readWithSeparator(path, ",")
+  }
+
+  // Additional method to support custom separators
+  def readWithSeparator(path: String, separator: String): DataFrame = {
     sparkSession
       .read
-      .option("sep", ",")
+      .option("sep", separator)
       .option("inferSchema", "true")
       .option("header", "true")
       .format("csv")
@@ -24,7 +30,7 @@ class ReaderImpl(sparkSession: SparkSession) extends Reader {
   }
 
   def read(): DataFrame = {
-    sparkSession.sql("SELECT 'Empty DataFrame for unit testing implementation")
+    sparkSession.sql("SELECT 'Empty DataFrame for unit testing implementation'")
   }
 
 }
