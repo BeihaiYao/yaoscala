@@ -23,15 +23,14 @@ object Main extends App with Job {
     cliArgs(1)
   } catch {
     case e: java.lang.ArrayIndexOutOfBoundsException => {
-      print("No input defined")
-      sys.exit(1)
+      "./src/main/resources/test_file.csv"
     }
   }
   val DST_PATH: String = try {
     cliArgs(2)
   } catch {
     case e: java.lang.ArrayIndexOutOfBoundsException => {
-      "./default/output-writer"
+      "./default/output-writer-csv"
     }
   }
 
