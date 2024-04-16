@@ -13,7 +13,9 @@ class ProcessorImpl() extends Processor {
     inputDF.groupBy("Country")
       .agg(
         sum("Number").alias("TotalNumber"),
-        count("*").alias("Count")
+        count("*").alias("Count"),
+        max("Number").alias("MaxNumber"),
+        min("Number").alias("MinNumber")
       )
   }
 }
